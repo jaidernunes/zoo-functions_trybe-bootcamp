@@ -9,7 +9,8 @@ function countEntrants(entrants) {
     }
     if (entrant.age >= 50) {
       obj.senior += 1;
-    } else if (entrant.age >= 18 && entrant.age < 50) {
+    }
+    if (entrant.age >= 18 && entrant.age < 50) {
       obj.adult += 1;
     }
     return obj;
@@ -28,6 +29,13 @@ function countEntrants(entrants) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const entrant = countEntrants(entrants);
+  return (entrant.child * data.prices.child)
+  + (entrant.adult * data.prices.adult)
+  + (entrant.senior * data.prices.senior);
 }
-
+console.log(calculateEntry({}));
 module.exports = { calculateEntry, countEntrants };
