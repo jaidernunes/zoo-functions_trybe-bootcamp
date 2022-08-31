@@ -20,17 +20,11 @@ function getSchedule(scheduleTarget) {
   if (data.species.some((specie) => specie.name === scheduleTarget)) {
     return data.species.find((specie) => specie.name === scheduleTarget).availability;
   }
-
   if (daysArr.some((day) => day === scheduleTarget)) {
     const dayObj = { [scheduleTarget]: week[scheduleTarget] };
     return dayObj;
   }
-  // if (data.species.some((specie) => specie.availability.includes(scheduleTarget))) {
-  //   return week[scheduleTarget];
-  // }
-
   return week;
 }
-// getSchedule();
-console.log(getSchedule('Monday'));
+
 module.exports = getSchedule;
