@@ -1,54 +1,40 @@
-/* eslint-disable max-lines-per-function */
 // const data = require('../data/zoo_data');
 const { employees, species } = require('../data/zoo_data');
 
-const returnedObj = {
-  id: 'id',
-  fullName: 'name last',
-  species: [],
-  locations: [],
-};
-
-// const allObject = {
-//   id: employee.id,
-//   fullName: `${employee.firstName} ${employee.lastName}`,
-//   species: species.filter((specie) => employee.responsibleFor.includes(specie.id)).map((specie) => specie.name),
-//   locations: species.filter((specie) => employee.responsibleFor.includes(specie.id)).map((specie) => specie.location),
+// const returnedObj = {
+//   id: findEmployee.id,
+//   fullName: `${findEmployee.firstName} ${findEmployee.lastName}`,
+//   species: speciesNames,
+//   locations: speciesLocation,
+// };
+// const returnedObj = {
+//   id: 'id',
+//   fullName: 'name last',
+//   species: [],
+//   locations: [],
 // };
 
-function getEmployeesCoverage(employeeRef) {
-  // seu código aqui
-  if (employeeRef === undefined) {
-    return employees.map((em) => ({
-      id: em.id,
-      fullName: `${em.firstName} ${em.lastName}`,
-      species: species.filter((spc) => em.responsibleFor.includes(spc.id)).map((sp) => sp.name),
-      locations: species.filter((sp) => em.responsibleFor.includes(sp.id)).map((sp) => sp.location),
-    }));
+function getEmployeesCoverage(eR) {
+  if (eR === undefined) {
+    return employees.map((e) => ({ id: e.id,
+      fullName: `${e.firstName} ${e.lastName}`,
+      species: species.filter((spc) => e.responsibleFor.includes(spc.id)).map((sp) => sp.name),
+      locations: species.filter((s) => e.responsibleFor.includes(s.id)).map((s) => s.location) }));
   }
-  if (!employees.some((emp) => emp.id === employeeRef.id
-    || emp.firstName === employeeRef.name
-    || emp.lastName === employeeRef.name)) {
+  if (!employees.some((e) => e.id === eR.id || e.firstName === eR.name || e.lastName === eR.name)) {
     throw new Error('Informações inválidas');
   }
-  const findEmployee = employees.find((employee) => (employee.id === employeeRef.id
-  || employee.firstName === employeeRef.name
-  || employee.lastName === employeeRef.name));
+  const findEmployee = employees.find((e) => (e.id === eR.id || e.firstName === eR.name
+    || e.lastName === eR.name));
   const findSpecie = species.filter((specie) => findEmployee.responsibleFor.includes(specie.id));
   const speciesNames = findSpecie.map((specie) => specie.name);
   const speciesLocation = findSpecie.map((specie) => specie.location);
-
-  returnedObj.id = findEmployee.id;
-  returnedObj.fullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
-  returnedObj.species = speciesNames;
-  returnedObj.locations = speciesLocation;
-  return returnedObj;
+  return { id: findEmployee.id,
+    fullName: `${findEmployee.firstName} ${findEmployee.lastName}`,
+    species: speciesNames,
+    locations: speciesLocation };
 }
 
-//  ALL RETURN
-
-// console.log(getEmployeesCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-// '4b40a139-d4dc-4f09-822d-ec25e819a5ad'
 module.exports = getEmployeesCoverage;
 
 // 3 reqs ok !!!!!!! \/
