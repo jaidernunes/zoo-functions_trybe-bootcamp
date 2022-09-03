@@ -39,20 +39,4 @@ describe('Testes da função getOpeningHours', () => {
   it('verifica se recebe erro ao receber um dia inválido', () => {
     expect(() => (getOpeningHours('Noday', '09:00-AM'))).toThrow('The day must be valid. Example: Monday');
   });
-
-  // it('', () => {
-  //   expect().toEqual();
-  // });
-
-  // it('', () => {
-  //   expect().toEqual();
-  // });
-
-  // it('', () => {
-  //   expect().toEqual();
-  // });
-
-  // it('', () => {
-  //   expect().toEqual();
-  // });
 });
